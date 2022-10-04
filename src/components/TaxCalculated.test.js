@@ -48,15 +48,20 @@ describe('TaxCalculated', () => {
         // Arrange
         const fName="testFName";
         const lName="testLName";
-        const tax=100
-        const effectiveTax=23
+        const tax=100100.567
+        const effectiveTax=23.0292
         const year=2019
         const taxPerSlab=[105,10,10]
         const salary=300
         render(<TaxCalculated fName={fName} lName={lName} tax={tax} effectiveTax={effectiveTax} year={year} taxPerSlab={taxPerSlab} salary={salary} />);
 
         // Act
-        
+        const effectiveTaxElement = screen.getByText(/23.03/i); // number rounded off
+        const marginalTaxElement = screen.getByText(/100,100.57/i); // number rounded off
+
+        // Assert
+        expect(effectiveTaxElement).toBeInTheDocument();
+        expect(marginalTaxElement).toBeInTheDocument();
     })
 
 })

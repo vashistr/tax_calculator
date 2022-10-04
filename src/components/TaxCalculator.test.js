@@ -1,5 +1,6 @@
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
 import TaxCalculator from './TaxCalculator';
 
 
@@ -39,10 +40,10 @@ describe('TaxCalculator', () => {
         expect(salary.value).toMatch("1000");
     });
 
-
     test('fetches tax if call succeeds', async () => {
         // Arrange
         render(<TaxCalculator />);
+        const promise = Promise.resolve();
         window.fetch = jest.fn();
         window.fetch.mockResolvedValueOnce({
             json: async () => [{ max: 1000, min: 10, rate: 0.15 }]
@@ -53,10 +54,13 @@ describe('TaxCalculator', () => {
         fireEvent.click(btnElement);
 
         // Assert
-        const linkElement = await screen.findByText(/tax/i);
-        expect(linkElement).toBeInTheDocument();
+        const linkElement = await screen.getByText(/calculate/i);
+        await act(() => {
+            expect(linkElement).toBeInTheDocument();
+        }) 
+        await waitFor(() => {
+            expect(linkElement).toBeInTheDocument();
+        })
     })
-
-
 })
 

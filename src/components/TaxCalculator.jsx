@@ -19,12 +19,13 @@ const TaxCalculator = () => {
   const [effectiveTax, setEffectiveTax] = useState();
   const [isFormValid, setIsFormValid] = useState(false);
   const [isCalculated, setIsCalculated] = useState(false);
+  const [calculateText, setCalculateText] = useState("Calculate!");
 
   // to remove extra spaces (if there)
+  const isEnteredSalaryValid = salary !== '';
   const isEnteredLNameValid = lName.trim() !== '';
   const isEnteredFNameValid = fName.trim() !== '';
-  const isEnteredSalaryValid = salary !== '';
-
+  
   // to set the form validity
   useEffect(() => {
     if (isEnteredFNameValid && isEnteredLNameValid && isEnteredSalaryValid) {
@@ -42,7 +43,6 @@ const TaxCalculator = () => {
         if (res.ok) {
           return res.json();
         } else {
-          console.log(res)
           setError("Status" + res.status + "Due to" + res.statusText)
         }
       }).then((dataTax) => {
@@ -51,7 +51,6 @@ const TaxCalculator = () => {
         setIsCalculated(true);
         return dataTax;
       }).catch((err) => {
-        console.log(err)
         setError(err.message)
         setLoading(false);
       });
@@ -60,7 +59,6 @@ const TaxCalculator = () => {
         calculateTax();
       }
     } catch (error) {
-      console.log(error)
       setError(error.message)
       setLoading(false);
     }
@@ -131,9 +129,10 @@ const TaxCalculator = () => {
   const formSubmissionHandler = (event) => {
     event.preventDefault();
 
-    setIsCalculated(false);
-    setLoading(true);
     setError(null);
+    setLoading(true);
+    setIsCalculated(false);
+    setCalculateText("Calculate Again!")
 
     if (!isEnteredFNameValid && !isEnteredLNameValid && !isEnteredSalaryValid) {
       return;
@@ -172,7 +171,7 @@ const TaxCalculator = () => {
           <br />
 
           <div className='form-actions'>
-            <button className='submitBtn' disabled={!isFormValid}>Calculate!</button>
+            <button className='submitBtn' disabled={!isFormValid}>{calculateText}</button>
           </div>
         </form>
       </div>
