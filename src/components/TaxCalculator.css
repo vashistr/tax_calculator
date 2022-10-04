@@ -1,0 +1,54 @@
+body {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: url(../assets/image2.jpg) no-repeat center fixed;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    justify-content: center;
+    overflow: scroll;
+    margin: 40px;
+}
+
+.heading {
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 60px;
+	color: black;
+	font-weight: bolder;
+	text-transform: uppercase;
+}
+
+.formInput {
+    box-sizing: border-box;
+    width: 300px;
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid gray;
+}
+
+.submitBtn {
+    height: 40px;
+    width: 300px;
+    margin-top: 30px;
+    background-color: rgb(84, 105, 212);
+    color: white;
+    padding: 10px;
+    border-radius: 7px;
+    font-size: medium;
+    font-weight: 600;
+    border-style: none;
+}
+
+.submitBtn:disabled {
+    background-color: #dddddd;
+}
+
+.err {
+    color: red;
+}
+
+.marginRight {
+    margin-right: 45%;
+}
