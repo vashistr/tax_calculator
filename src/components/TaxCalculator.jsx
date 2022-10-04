@@ -68,6 +68,7 @@ const TaxCalculator = () => {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, [])
 
   /*
